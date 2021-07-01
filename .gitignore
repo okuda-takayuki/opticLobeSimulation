@@ -1,0 +1,5 @@
+*.sh
+x86_64
+result/*
+testdata/*
+output

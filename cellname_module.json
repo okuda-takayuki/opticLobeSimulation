@@ -1,0 +1,121 @@
+[
+  {
+    "name": "HH",
+    "root": "modules",
+    "path": "HHneuron",
+    "class": "HHneuron",
+    "opt": {}
+  },
+  {
+    "name" : "R",
+    "path": "Rneuron",
+    "root": "modules",
+    "class": "Rneuron",
+    "opt": {}
+  },
+  {
+    "name" : "L",
+    "root": "modules",
+    "path": "Lneuron",
+    "class": "Lneuron",
+    "opt": {}
+  },
+  {
+    "name" : "Tm1",
+    "root": "modules",
+    "path": "Medullaneuron",
+    "class": "Medullaneuron",
+    "opt": {
+      "type": "Tm1"
+    }
+  },
+  {
+    "name" : "Tm2",
+    "root": "modules",
+    "path": "Medullaneuron",
+    "class": "Medullaneuron",
+    "opt": {
+      "type": "Tm2"
+    }
+  },
+  {
+    "name" : "Tm4",
+    "root": "modules",
+    "path": "Medullaneuron",
+    "class": "Medullaneuron",
+    "opt": {
+      "type": "Tm4"
+    }
+  },
+  {
+    "name" : "Tm9",
+    "root": "modules",
+    "path": "Medullaneuron",
+    "class": "Medullaneuron",
+    "opt": {
+      "type": "Tm9"
+    }
+  },
+  {
+    "name" : "CT1",
+    "root": "modules",
+    "path": "Medullaneuron",
+    "class": "Medullaneuron",
+    "opt": {
+      "type": "CT1"
+    }
+  },
+  {
+    "name" : "Mi1",
+    "root": "modules",
+    "path": "Medullaneuron",
+    "class": "Medullaneuron",
+    "opt": {
+      "type": "Mi1"
+    }
+  },
+  {
+    "name" : "C3",
+    "root": "modules",
+    "path": "Medullaneuron",
+    "class": "Medullaneuron",
+    "opt": {
+      "type": "C3"
+    }
+  },
+  {
+    "name" : "C3",
+    "root": "modules",
+    "path": "Medullaneuron",
+    "class": "Medullaneuron",
+    "opt": {
+      "type": "C3"
+    }
+  },
+  {
+    "name" : "T4",
+    "root": "modules",
+    "path": "Medullaneuron",
+    "class": "Medullaneuron",
+    "opt": {
+      "type": "T4"
+    }
+  },
+  {
+    "name" : "T5",
+    "root": "modules",
+    "path": "Medullaneuron",
+    "class": "Medullaneuron",
+    "opt":{
+      "type": "T5"
+    }
+  },
+  {
+    "name" : "HH_point",
+    "root": "modules",
+    "path": "HHModelPointNeuron",
+    "class": "HHmodel",
+    "opt": {
+    }
+  }
+]
