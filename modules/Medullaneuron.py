@@ -18,37 +18,36 @@ class Medullaneuron:
     def generateCell(self, celltype="Tm1", params={}):
 
         if self.celltype =="Tm1":
-            medullafile = "modules/swc/Tm1.swc"
+            medullafile = "modules/swc/Tm1 home_226.swc"
         if self.celltype =="Tm2":
-            medullafile = "modules/swc/Tm1.swc"
+            medullafile = "modules/swc/Tm2 home_227.swc"
         if self.celltype =="Tm4":
-            medullafile = "modules/swc/Tm1.swc"
+            medullafile = "modules/swc/Tm4-A-post_36.swc"
         if self.celltype =="Tm9":
-            medullafile = "modules/swc/Tm1.swc"
-        if self.celltype =="C2":
-            medullafile = "modules/swc/Tm1.swc"
+            medullafile = "modules/swc/Tm9 home_173.swc"
         if self.celltype =="C3":
-            medullafile = "modules/swc/Tm1.swc"
+            medullafile = "modules/swc/C3 home_10.swc"
         if self.celltype =="Mi1":
-            medullafile = "modules/swc/Tm1.swc"
+            medullafile = "modules/swc/Mi1 home_212.swc"
         if self.celltype =="T4":
-            medullafile = "modules/swc/Tm1.swc"
+            medullafile = "modules/swc/T4a-03_167.swc"
         if self.celltype =="T5":
-            medullafile = "modules/swc/Tm1.swc"
+            medullafile = "modules/swc/T5a-06 rep_571.swc"
 
-        myMedulla = np.loadtxt(medullafile)
-        myMedulla[:,2:6] = 0.001*8*myMedulla[:,2:6]
-        interim = myMedulla.shape
-        me_nofcomps = interim[0]
-        compdiam = myMedulla[:,5]*2.0
+        mecell = np.loadtxt(medullafile)
+        mecell[:,2:6]=0.001*8*mecell[:,2:6]
+        interim=mecell.shape
+        me_nofcomps=interim[0]
+        compdiam=mecell[:,5]*2.0
 
         for i in range(1, me_nofcomps, 1):
-            aind = int(myMedulla[i,0]-1)
-            bind = int(myMedulla[i,6]-1)
-            axyz = myMedulla[aind,2:5]
-            bxyz = myMedulla[bind,2:5]
+            aind = int(mecell[i,0]-1)
+            bind = int(mecell[i,6]-1)
+            axyz = mecell[aind,2:5]
+            bxyz = mecell[bind,2:5]
 
-            complength = np.sqrt(np.sum((axyz-bxyz)**2))
+            complength=np.sqrt(np.sum((axyz-bxyz)**2))
+
             meandiam = (compdiam[aind]+compdiam[bind])*0.5
 
             self.cell[str(aind)] = neuron.h.Section()
