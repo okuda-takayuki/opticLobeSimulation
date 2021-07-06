@@ -6,12 +6,6 @@ with open("meta.json","r") as f:
     sys.path.append(meta["nrnpy-path"])
 import neuron
 
-center = 0.6
-tm9 = 1600000
-ct1 = 1
-dif = 0
-
-
 class Medullaneuron:
     def __init__(self, index, opt={"type":"Tm1"},params={}):
         self.index = index
@@ -22,116 +16,52 @@ class Medullaneuron:
         self.synlist = []
 
     def generateCell(self, celltype="Tm1", params={}):
-        if self.celltype == "Tm1":
-            self.cell["axon"] = neuron.h.Section(name="axon")
-            self.cell["axon"].nseg = 9
-            self.cell["axon"].diam = 0.4 - dif
-            self.cell["axon"].L = 140
-            self.cell["axon"].insert("mole")
-            self.cell["axon"].cm = center
-            self.cell["axon"].Ra = 0.01
 
-            #self.cell["ap_dend"] = neuron.h.Section(name="ap_dend")
-            #self.cell["ap_dend"].nseg = 9
-            #self.cell["ap_dend"].L = 100
-            #self.cell["ap_dend"].diam = 0.2
-            #self.cell["ap_dend"].insert("mole")
-            #self.cell["ap_dend"].cm = center
-            #self.cell["ap_dend"].Ra = 0.01
+        if self.celltype =="Tm1":
+            medullafile = "modules/swc/Tm1.swc"
+        if self.celltype =="Tm2":
+            medullafile = "modules/swc/Tm1.swc"
+        if self.celltype =="Tm4":
+            medullafile = "modules/swc/Tm1.swc"
+        if self.celltype =="Tm9":
+            medullafile = "modules/swc/Tm1.swc"
+        if self.celltype =="C2":
+            medullafile = "modules/swc/Tm1.swc"
+        if self.celltype =="C3":
+            medullafile = "modules/swc/Tm1.swc"
+        if self.celltype =="Mi1":
+            medullafile = "modules/swc/Tm1.swc"
+        if self.celltype =="T4":
+            medullafile = "modules/swc/Tm1.swc"
+        if self.celltype =="T5":
+            medullafile = "modules/swc/Tm1.swc"
 
-            #self.cell["ap_dend"].connect(self.cell["axon"], 0.6)
+        myMedulla = np.loadtxt(medullafile)
+        myMedulla[:,2:6] = 0.001*8*myMedulla[:,2:6]
+        interim = myMedulla.shape
+        me_nofcomps = interim[0]
+        compdiam = myMedulla[:,5]*2.0
 
+        for i in range(1, me_nofcomps, 1):
+            aind = int(myMedulla[i,0]-1)
+            bind = int(myMedulla[i,6]-1)
+            axyz = myMedulla[aind,2:5]
+            bxyz = myMedulla[bind,2:5]
 
-        if self.celltype == "Tm2":
-            self.cell["axon"] = neuron.h.Section(name="axon")
-            self.cell["axon"].nseg = 9
-            self.cell["axon"].diam = 0.4 - dif
-            self.cell["axon"].L = 140
-            self.cell["axon"].insert("mole")
-            self.cell["axon"].cm = center
-            self.cell["axon"].Ra = 0.01
+            complength = np.sqrt(np.sum((axyz-bxyz)**2))
+            meandiam = (compdiam[aind]+compdiam[bind])*0.5
 
-            #self.cell["ap_dend"] = neuron.h.Section(name="ap_dend")
-            #self.cell["ap_dend"].nseg = 9
-            #self.cell["ap_dend"].L = 100
-            #self.cell["ap_dend"].diam = 0.2
-            #self.cell["ap_dend"].insert("mole")
-            #self.cell["ap_dend"].cm = center
-            #self.cell["ap_dend"].Ra = 0.01
+            self.cell[str(aind)] = neuron.h.Section()
+            self.cell[str(aind)].diam = meandiam
+            self.cell[str(aind)].L = complength
+            self.cell[str(aind)].insert ("mole")
+            self.cell[str(aind)].cm = 0.6
+            self.cell[str(aind)].Ra = 0.1
 
-            #self.cell["ap_dend"].connect(self.cell["axon"], 0.6)
+            if bind == 0:
+                continue
 
-        if self.celltype == "Tm4":
-            self.cell["axon"] = neuron.h.Section(name="axon")
-            self.cell["axon"].nseg = 9
-            self.cell["axon"].diam = 0.4 - dif
-            self.cell["axon"].L = 140
-            self.cell["axon"].insert("mole")
-            self.cell["axon"].cm = center
-            self.cell["axon"].Ra = 0.01
-
-            #self.cell["ap_dend"] = neuron.h.Section(name="ap_dend")
-            #self.cell["ap_dend"].nseg = 9
-            #self.cell["ap_dend"].L = 100
-            #self.cell["ap_dend"].diam = 0.2
-            #self.cell["ap_dend"].insert("mole")
-            #self.cell["ap_dend"].cm = center
-            #self.cell["ap_dend"].Ra = 0.01
-
-            #self.cell["ap_dend"].connect(self.cell["axon"], 0.6)
-
-        if self.celltype == "Tm9":
-            self.cell["axon"] = neuron.h.Section(name="axon")
-            self.cell["axon"].nseg = 9
-            self.cell["axon"].diam = 0.4
-            self.cell["axon"].L = 140
-            self.cell["axon"].insert("mole")
-            self.cell["axon"].cm = center
-            self.cell["axon"].Ra = 0.01
-
-
-        if self.celltype == "Mi1":
-            self.cell["axon"] = neuron.h.Section(name="axon")
-            self.cell["axon"].nseg = 9
-            self.cell["axon"].diam = 0.52 - dif
-            self.cell["axon"].L = 134
-            self.cell["axon"].insert("mole")
-            self.cell["axon"].cm = center
-            self.cell["axon"].Ra = 0.01
-        if self.celltype == "CT1":
-            self.cell["axon"] = neuron.h.Section(name="axon")
-            self.cell["axon"].nseg = 9
-            self.cell["axon"].diam = 0.3 - dif
-            self.cell["axon"].L = 78
-            self.cell["axon"].insert("mole")
-            self.cell["axon"].cm = ct1
-            self.cell["axon"].Ra = 0.01
-        if self.celltype == "C3":
-            self.cell["axon"] = neuron.h.Section(name="axon")
-            self.cell["axon"].nseg = 9
-            self.cell["axon"].diam = 0.378 - dif
-            self.cell["axon"].L = 157
-            self.cell["axon"].insert("mole")
-            self.cell["axon"].cm = center
-            self.cell["axon"].Ra = 0.01
-                
-        if self.celltype == "T4":
-            self.cell["axon"] = neuron.h.Section(name="axon")
-            self.cell["axon"].nseg = 9
-            self.cell["axon"].diam = 0.38
-            self.cell["axon"].L = 106
-            self.cell["axon"].insert("T4")
-            self.cell["axon"].gl_T4 = 8000
-            self.cell["axon"].Ra = 0.01
-        if self.celltype == "T5":
-            self.cell["axon"] = neuron.h.Section(name="axon")
-            self.cell["axon"].nseg = 9
-            self.cell["axon"].diam = 0.38
-            self.cell["axon"].L = 97
-            self.cell["axon"].insert("T4")
-            self.cell["axon"].gl_T4 = 8000
-            self.cell["axon"].Ra = 0.01
-
+            self.cell[str(aind)].connect(self.cell[str(bind)], 1)
 
     def synapticConnection(self, connection_gid=0,type="E",pc=None,position=["soma",0.5]):
         syn = self.generateSynapse(type=type,position=position)
